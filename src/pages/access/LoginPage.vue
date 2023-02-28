@@ -27,7 +27,7 @@
                   />
                   <q-input
                     type="password"
-                    label="PASSWORD"
+                    label="Password"
                     v-model="password"
                     :rules="[
                       (val) =>
@@ -108,16 +108,6 @@ export default {
 };
 </script>
 <style scoped>
-.wave {
-  position: fixed;
-  height: 100%;
-  left: 0;
-  bottom: 0;
-  z-index: -1;
-}
-.container {
-  background: #c3613a;
-}
 body {
   background: #333333;
 }

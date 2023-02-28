@@ -82,19 +82,28 @@
         <q-btn dense flat round icon="lens" size="8.5px" color="green" />
       </div>
       <q-list>
-        <div class="text-center q-py-md">
-          <q-btn
-            outline
-            color="light-blue-8"
-            icon="account_circle"
-            label="Gunawan"
-            class="q-px-lg"
-          ></q-btn>
-        </div>
+        <q-card flat class="text-justify q-py-md">
+          <q-item>
+            <q-item-section avatar>
+              <q-avatar rounded>
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              </q-avatar>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-subtitle2 text-weight-bold">
+                Gunawan
+              </q-item-label>
+              <q-item-label class="text-grey text-overline">
+                Administrator
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-card>
         <q-item
           clickable
           active-class="my-menu-link"
           v-ripple
+          :to="{ name: 'pertama' }"
           :active="link === 'My page'"
           @click="link = 'My page'"
         >
@@ -217,6 +226,11 @@ export default {
   data() {
     const $q = useQuasar();
     return {
+      profile_card_data: {
+        name: "Pratik Patel",
+        des: "Solutions Developer",
+        avatar: "https://cdn.quasar.dev/img/boy-avatar.png",
+      },
       leftDrawerOpen: false,
       link: "My page",
       text: "",

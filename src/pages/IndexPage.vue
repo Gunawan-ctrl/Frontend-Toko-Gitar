@@ -179,7 +179,7 @@
         </div>
       </div>
       <div class="row q-col-gutter-md">
-        <div class="col-8 col-xs-12 col-sm-8">
+        <div class="col-8 col-md-8 col-xs-12">
           <q-toolbar>
             <q-toolbar-title class="text-overline">
               ACTIVE PROJECTS

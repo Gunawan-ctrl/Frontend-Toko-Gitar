@@ -8,6 +8,11 @@ const routes = [
         name: "dashboard",
         component: () => import("pages/IndexPage.vue"),
       },
+      {
+        path: "",
+        name: "pertama",
+        component: () => import("pages/ErrorNotFound.vue"),
+      },
     ],
   },
   {
