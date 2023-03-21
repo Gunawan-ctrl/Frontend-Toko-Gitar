@@ -46,7 +46,7 @@
           size="md"
           icon="account_circle"
           color="white"
-          label="Gunawan"
+          :label="dataUser.namaLengkap"
         >
           <div class="row no-wrap q-pa-md">
             <div class="column">
@@ -60,7 +60,9 @@
                 <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
 
-              <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
+              <div class="text-subtitle1 q-mt-md q-mb-xs text-weight-bold">
+                {{ dataUser.namaLengkap }}
+              </div>
 
               <q-btn
                 color="primary"
@@ -91,7 +93,7 @@
             </q-item-section>
             <q-item-section>
               <q-item-label class="text-subtitle2 text-weight-bold">
-                Gunawan
+                {{ dataUser.namaLengkap }}
               </q-item-label>
               <q-item-label class="text-grey text-overline">
                 Administrator
@@ -101,101 +103,43 @@
         </q-card>
         <q-item
           clickable
-          active-class="my-menu-link"
+          active-class="active"
           v-ripple
-          :to="{ name: 'pertama' }"
-          :active="link === 'My page'"
-          @click="link = 'My page'"
+          :to="{ name: 'dashboard' }"
         >
           <q-item-section avatar>
-            <q-icon name="fas fa-book" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>My page</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item
-          clickable
-          active-class="my-menu-link"
-          v-ripple
-          :active="link === 'Dashboard'"
-          @click="link = 'Dashboard'"
-        >
-          <q-item-section avatar>
-            <q-icon name="fas fa-tachometer-alt" />
+            <q-icon name="home" size="sm" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Dashboard</q-item-label>
           </q-item-section>
         </q-item>
+
         <q-item
           clickable
-          active-class="my-menu-link"
+          active-class="active"
           v-ripple
-          :active="link === 'Edit Page'"
-          @click="link = 'Edit Page'"
+          :to="{ name: 'kategori' }"
         >
           <q-item-section avatar>
-            <q-icon name="fas fa-pencil-alt" />
+            <q-icon name="grid_view" size="sm" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Edit Page</q-item-label>
+            <q-item-label>Kategori</q-item-label>
           </q-item-section>
         </q-item>
+
         <q-item
           clickable
-          active-class="my-menu-link"
+          active-class="active"
           v-ripple
-          :active="link === 'Chat'"
-          @click="link = 'Chat'"
+          :to="{ name: 'dataBarang' }"
         >
           <q-item-section avatar>
-            <q-icon name="fas fa-comments" />
+            <q-icon name="production_quantity_limits" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Chat</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item
-          clickable
-          active-class="my-menu-link"
-          v-ripple
-          :active="link === 'Community'"
-          @click="link = 'Community'"
-        >
-          <q-item-section avatar>
-            <q-icon name="fas fa-satellite-dish" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Community</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item
-          clickable
-          active-class="my-menu-link"
-          v-ripple
-          :active="link === 'Settings'"
-          @click="link = 'Settings'"
-        >
-          <q-item-section avatar>
-            <q-icon name="fas fa-cog" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Settings</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item
-          clickable
-          active-class="my-menu-link"
-          v-ripple
-          :active="link === 'Creators'"
-          @click="link = 'Creators'"
-        >
-          <q-item-section avatar>
-            <q-icon name="fas fa-user" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Creators</q-item-label>
+            <q-item-label>Data Barang</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -238,6 +182,7 @@ export default {
       toggleDarkMode() {
         $q.dark.toggle();
       },
+      dataUser: this.$q.localStorage.getItem("dataUser"),
     };
   },
   methods: {
@@ -250,5 +195,9 @@ export default {
 <style scoped>
 body.body--dark {
   background: #333333;
+}
+.active {
+  color: green;
+  font-weight: bold;
 }
 </style>

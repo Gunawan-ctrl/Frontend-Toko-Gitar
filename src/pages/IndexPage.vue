@@ -12,8 +12,10 @@
               </q-item-section>
 
               <q-item-section>
-                <q-item-label><strong>AAE IdeaPro</strong> </q-item-label>
-                <q-item-label caption> UI/UX Designer </q-item-label>
+                <q-item-label
+                  ><strong>{{ dataUser.namaLengkap }}</strong>
+                </q-item-label>
+                <q-item-label caption>Frontend Dev</q-item-label>
               </q-item-section>
 
               <q-item-section>
@@ -69,117 +71,88 @@
 
         <div class="col-12 col-md-4 col-sm-6 col-xs-12 col-lg-4">
           <q-card class="my-card">
-            <q-item>
-              <q-item-section>
-                <q-item-label class="text-subtitle1 text-weight-bold">
-                  Give your support
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-separator />
-            <q-item>
-              <q-item-section avatar>
-                <q-btn
-                  round
-                  color="blue-2"
-                  text-color="blue-8"
-                  icon="fas fa-bolt"
-                />
-              </q-item-section>
-              <q-item-section>
-                <q-badge color="white text-black"> Quantity: </q-badge>
-
-                <q-slider
-                  v-model="value"
-                  :min="0"
-                  :max="20"
-                  :step="1"
-                  label
-                  label-always
-                  color="light-green"
-                />
-              </q-item-section>
-            </q-item>
-            <q-separator />
-            <q-item>
-              <q-item-section>
-                <q-btn
-                  color="primary"
-                  icon-right="fas fa-chevron-right"
-                  label="SUPPORT"
-                  flat
-                />
-              </q-item-section>
-            </q-item>
+            <q-calendar-month
+              ref="calendar"
+              v-model="selectedDate"
+              animated
+              bordered
+              focusable
+              hoverable
+              no-active-date
+              :day-min-height="27"
+              :day-height="10"
+              @change="onChange"
+              @moved="onMoved"
+              @click-date="onClickDate"
+              @click-day="onClickDay"
+              @click-workweek="onClickWorkweek"
+              @click-head-workweek="onClickHeadWorkweek"
+              @click-head-day="onClickHeadDay"
+            >
+              <template #day="{ scope: { timestamp } }">
+                <template
+                  v-for="event in eventsMap[timestamp.date]"
+                  :key="event.id"
+                >
+                  <div
+                    :class="badgeClasses(event, 'day')"
+                    :style="badgeStyles(event, 'day')"
+                    class="my-event"
+                  >
+                    <abbr :title="event.details" class="tooltip">
+                      <span class="title q-calendar__ellipsis">{{
+                        event.title + (event.time ? " - " + event.time : "")
+                      }}</span>
+                    </abbr>
+                  </div>
+                </template>
+              </template>
+            </q-calendar-month>
           </q-card>
         </div>
 
-        <div class="col-12 col-md-4 col-sm-12 col-xs-12 col-lg-4">
-          <q-card class="my-card">
-            <q-item active-class="tab-active" class="navigation-item">
-              <q-item-section>
-                <q-btn
-                  color="light-blue-8"
-                  icon="fab fa-facebook-f"
-                  label="Save with facebook"
-                  outline
-                />
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn
-                  flat
-                  round
-                  color="grey-6"
-                  icon="fas fa-times"
-                  size="sm"
-                />
-              </q-item-section>
-            </q-item>
-            <q-item active-class="tab-active">
-              <q-item-section>
-                <q-btn
-                  color="grey-6"
-                  icon="fab fa-twitter"
-                  text-color="green"
-                  label="Tweet with twitter"
-                  outline
-                />
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn
-                  flat
-                  round
-                  color="grey-6"
-                  icon="fas fa-times"
-                  size="sm"
-                />
-              </q-item-section>
-            </q-item>
-            <q-item active-class="tab-active">
-              <q-item-section class="q-pb-xs">
-                <q-btn
-                  color="grey-6"
-                  icon="fab fa-pinterest-p"
-                  text-color="red"
-                  label="Save with pinterest"
-                  outline
-                />
-              </q-item-section>
-              <q-item-section avatar class="q-pb-sm">
-                <q-btn
-                  flat
-                  round
-                  color="grey-6"
-                  icon="fas fa-times"
-                  size="sm"
-                />
-              </q-item-section>
-            </q-item>
+        <div class="col-12 col-md-4 col-sm-12 col-xs-12">
+          <q-card bordered>
+            <div>
+              <q-carousel
+                v-model="slide"
+                vertical
+                transition-prev="slide-down"
+                transition-next="slide-up"
+                swipeable
+                infinite
+                :autoplay="autoplay"
+                animated
+                control-color="blue-7"
+                navigation-icon="radio_button_unchecked"
+                navigation
+                padding
+                arrows
+                height="160px"
+                class="text-black shadow-1 rounded-borders"
+              >
+                <q-carousel-slide
+                  name="1"
+                  img-src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=740&t=st=1675681229~exp=1675681829~hmac=d55e789605b8a95be9b228eea10181024d4f4304c5b6815c48d19a6b6309981d"
+                >
+                </q-carousel-slide>
+                <q-carousel-slide
+                  name="2"
+                  img-src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=740&t=st=1675681229~exp=1675681829~hmac=d55e789605b8a95be9b228eea10181024d4f4304c5b6815c48d19a6b6309981d"
+                >
+                </q-carousel-slide>
+                <q-carousel-slide
+                  name="3"
+                  img-src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=740&t=st=1675681229~exp=1675681829~hmac=d55e789605b8a95be9b228eea10181024d4f4304c5b6815c48d19a6b6309981d"
+                >
+                </q-carousel-slide>
+              </q-carousel>
+            </div>
           </q-card>
         </div>
       </div>
       <div class="row q-col-gutter-md">
-        <div class="col-8 col-md-8 col-xs-12">
+        <div class="col-md-8 col-sm-8 col-xs-12">
           <q-toolbar>
             <q-toolbar-title class="text-overline">
               ACTIVE PROJECTS
@@ -347,12 +320,167 @@
 </template>
 
 <script>
+import {
+  QCalendarMonth,
+  addToDate,
+  parseDate,
+  parseTimestamp,
+  today,
+} from "@quasar/quasar-ui-qcalendar";
+import "@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass";
+import "@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass";
+import "@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass";
+// The function below is used to set up our demo data
+const CURRENT_DAY = new Date();
+
+function getCurrentDay(day) {
+  const newDay = new Date(CURRENT_DAY);
+  newDay.setDate(day);
+  const tm = parseDate(newDay);
+  return tm.date;
+}
+
 export default {
   name: "IndexPage",
+  components: {
+    QCalendarMonth,
+  },
   data() {
     return {
       value: null,
+      slide: "style",
+      lorem: "Lorem ipsum dolor, sit amet consectetur adipi.",
+      selection: ["green"],
+      autoplay: true,
+      selectedDate: today(),
+      events: [],
+      dataUser: this.$q.localStorage.getItem("dataUser"),
     };
+  },
+  computed: {
+    eventsMap() {
+      const map = {};
+      if (this.events.length > 0) {
+        this.events.forEach((event) => {
+          (map[event.date] = map[event.date] || []).push(event);
+          if (event.days !== undefined) {
+            let timestamp = parseTimestamp(event.date);
+            let days = event.days;
+            do {
+              timestamp = addToDate(timestamp, { day: 1 });
+              if (!map[timestamp.date]) {
+                map[timestamp.date] = [];
+              }
+              map[timestamp.date].push(event);
+            } while (--days > 1);
+          }
+        });
+      }
+      return map;
+    },
+  },
+  methods: {
+    badgeClasses(event, type) {
+      return {
+        [`text-white bg-${event.bgcolor}`]: true,
+        "rounded-border": true,
+      };
+    },
+    badgeStyles(day, event) {
+      const s = {};
+      return s;
+    },
+    onToday() {
+      this.$refs.calendar.moveToToday();
+    },
+    onPrev() {
+      this.$refs.calendar.prev();
+    },
+    onNext() {
+      this.$refs.calendar.next();
+    },
+    onMoved(data) {
+      // console.log("onMoved", data);
+    },
+    onChange(data) {
+      // console.log("onChange", data);
+    },
+    onClickDate(data) {
+      // console.log("onClickDate", data);
+    },
+    onClickDay(data) {
+      // console.log("onClickDay", data);
+    },
+    onClickWorkweek(data) {
+      // console.log("onClickWorkweek", data);
+    },
+    onClickHeadDay(data) {
+      // console.log("onClickHeadDay", data);
+    },
+    onClickHeadWorkweek(data) {
+      // console.log("onClickHeadWorkweek", data);
+    },
   },
 };
 </script>
+
+<style>
+.my-event {
+  position: relative;
+  font-size: 12px;
+  width: 100%;
+  margin: 1px 0 0 0;
+  justify-content: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.title {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.text-white {
+  color: white;
+}
+
+.bg-blue {
+  background: blue;
+}
+
+.bg-green {
+  background: green;
+}
+
+.bg-orange {
+  background: orange;
+}
+
+.bg-red {
+  background: red;
+}
+
+.bg-teal {
+  background: teal;
+}
+
+.bg-grey {
+  background: grey;
+}
+
+.bg-purple {
+  background: purple;
+}
+
+.rounded-border {
+  border-radius: 2px;
+}
+
+abbr.tooltip {
+  text-decoration: none;
+}
+</style>

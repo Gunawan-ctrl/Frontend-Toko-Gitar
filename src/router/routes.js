@@ -1,17 +1,25 @@
 const routes = [
   {
-    path: "/",
+    path: "",
     component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      authAdmin: true,
+    },
     children: [
       {
-        path: "",
+        path: "/",
         name: "dashboard",
         component: () => import("pages/IndexPage.vue"),
       },
       {
-        path: "",
-        name: "pertama",
-        component: () => import("pages/ErrorNotFound.vue"),
+        path: "/kategori",
+        name: "kategori",
+        component: () => import("pages/Kategori.vue"),
+      },
+      {
+        path: "/data-barang",
+        name: "dataBarang",
+        component: () => import("pages/DataBarang.vue"),
       },
     ],
   },
